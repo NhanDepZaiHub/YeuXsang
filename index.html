@@ -1,95 +1,183 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Mod Menu Pro</title>
-  <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: #111;
-      color: #fff;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-    }
-    .container {
-      background: #1e1e1e;
-      padding: 2rem;
-      border-radius: 16px;
-      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
-      max-width: 400px;
-      width: 100%;
-      text-align: center;
-    }
-    .container img {
-      width: 80px;
-      margin-bottom: 1rem;
-    }
-    h2 {
-      margin-bottom: 0.5rem;
-    }
-    input {
-      width: 100%;
-      padding: 0.8rem;
-      margin: 0.5rem 0;
-      border-radius: 8px;
-      border: none;
-    }
-    .checkbox {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      font-size: 0.9rem;
-      margin-top: 0.5rem;
-    }
-    button {
-      background: linear-gradient(to right, #ff416c, #ff4b2b);
-      border: none;
-      color: white;
-      padding: 0.8rem;
-      width: 100%;
-      border-radius: 8px;
-      margin-top: 1rem;
-      font-size: 1rem;
-      cursor: pointer;
-    }
-    .footer {
-      margin-top: 1rem;
-      font-size: 0.8rem;
-      color: #aaa;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        #mod-menu {
+            background-image: url("https://i.imgur.com/aBzdR6M.jpg"); /* Tạm dùng link ảnh online thay ảnh gốc */
+            background-size: cover;
+            background-position: center;
+            color: white;
+        }
+    </style>
+
 </head>
 <body>
-  <div class="container">
-    <img src="https://cdn-icons-png.flaticon.com/512/3064/3064197.png" alt="Icon" />
-    <h2>Mod Menu Pro</h2>
-    <p>Đăng nhập để truy cập mod menu</p>
-    <input type="text" id="username" placeholder="Tên đăng nhập" />
-    <input type="password" id="password" placeholder="Mật khẩu" />
-    <div class="checkbox">
-      <label><input type="checkbox" /> Lưu đăng nhập</label>
-      <a href="#" style="color: #00d8ff;">Quên mật khẩu?</a>
+    <!-- FPS Counter -->
+    <div id="fps-counter">FPS: <span id="fps">0</span></div>
+    
+    <!-- Time Display -->
+    <div id="time-display">00:00:00</div>
+    
+    <!-- Contact Info -->
+    <div id="contact-info">
+        <a href="mailto:contact@modmenu.com" class="contact-link">
+            <i class="fas fa-envelope"></i>
+        </a>
+        <a href="https://t.me/modmenu" class="contact-link" target="_blank">
+            <i class="fab fa-telegram"></i>
+        </a>
+        <a href="https://discord.gg/modmenu" class="contact-link" target="_blank">
+            <i class="fab fa-discord"></i>
+        </a>
     </div>
-    <button onclick="login()">ĐĂNG NHẬP</button>
-    <div class="footer">Mod Menu Pro v2.0 | ThienNhanBa'Ro ⚡</div>
-  </div>
+    
+    <!-- Toggle Button -->
+    <button id="toggle-menu">
+        <i class="fas fa-bars"></i>
+    </button>
+    
+    <!-- Mod Menu -->
+    <div id="mod-menu" class="hidden">
+        <div class="menu-header">
+            <h2>ThienNhanBa'Ro</h2>
+            <button id="close-menu"><i class="fas fa-times"></i></button>
+        </div>
+        
+        <div class="system-info">
+            <h3>Headshot 100%</h3>
+            <div id="system-specs"></div>
+        </div>
+        
+        <div class="menu-section">
+            <h3>Switch Options</h3>
+            <div class="section-divider"></div>
+            <div class="switches-container">
+                <div class="switch-item">
+                    <span>Antiban</span>
+                    <label class="switch">
+                        <input type="checkbox" id="switch1">
+                        <span class="slider round"></span>
+                    </label>
+                </div>
+                <div class="switch-item">
+                    <span>AimLock</span>
+                    <label class="switch">
+                        <input type="checkbox" id="switch2">
+                        <span class="slider round"></span>
+                    </label>
+                </div>
+                <div class="switch-item">
+                    <span>Nhẹ Tâm</span>
+                    <label class="switch">
+                        <input type="checkbox" id="switch3">
+                        <span class="slider round"></span>
+                    </label>
+                </div>
+                <div class="switch-item">
+                    <span>Đạn Thẳng</span>
+                    <label class="switch">
+                        <input type="checkbox" id="switch4">
+                        <span class="slider round"></span>
+                    </label>
+                </div>
+                <div class="switch-item">
+                    <span>Ghim Đầu</span>
+                    <label class="switch">
+                        <input type="checkbox" id="switch5">
+                        <span class="slider round"></span>
+                    </label>
+                </div>
+                <div class="switch-item">
+                    <span>Fix lag</span>
+                    <label class="switch">
+                        <input type="checkbox" id="switch6">
+                        <span class="slider round"></span>
+                    </label>
+                </div>
+                <div class="switch-item">
+                    <span>Fix lố</span>
+                    <label class="switch">
+                        <input type="checkbox" id="switch7">
+                        <span class="slider round"></span>
+                    </label>
+                </div>
+                <div class="switch-item">
+                    <span>Aim Ẩn</span>
+                    <label class="switch">
+                        <input type="checkbox" id="switch8">
+                        <span class="slider round"></span>
+                    </label>
+                </div>
+            </div>
+        </div>
+        
+        <div class="menu-section">
+            <h3>Thông tin Menu</h3>
+            <div class="section-divider"></div>
+            <div class="checkbox-container">
+                <div class="checkbox-item">
+                    <input type="checkbox" id="checkbox1">
+                    <label for="checkbox1">Zalo:0971193751</label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" id="checkbox2">
+                    <label for="checkbox2">Bản Quyền Code thuộc Huấn Hà</label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" id="checkbox3">
+                    <label for="checkbox3">ThienNhanBa'Ro</label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" id="checkbox4">
+                    <label for="checkbox4">Aimlock by ThienNhan</label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" id="checkbox5">
+                    <label for="checkbox5">Chống văng  game</label>
+                </div>
+            </div>
+        </div>
+    </div>
 
-  <script>
-    function login() {
-      const user = document.getElementById("username").value;
-      const pass = document.getElementById("password").value;
-      if (user === "thiennhanyeuxsang" && pass === "yeuxsang") {
-        alert("Đăng nhập thành công!");
-        // Chuyển sang trang menu thật (bạn có thể thay đổi URL dưới đây)
-        window.location.href = "https://nhandepzaihub.github.io/YeuXsang/";
-      } else {
-        alert("Sai tài khoản hoặc mật khẩu!");
-      }
-    }
-  </script>
+    <script src="fps.js"></script>
+    <script src="script.js"></script>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    const switches = [
+        { id: "switch1", message: "Đã bật Antiban✅", submenu: ["Thấp", "Trung", "An toàn tuyệt đối"] },
+        { id: "switch2", message: "Đã bật AimLock🇻🇳" },
+        { id: "switch3", message: "Đã bật Nhẹ Tâm ⚡" },
+        { id: "switch4", message: "Đã bật Đạn Thẳng 40%💸" },
+        { id: "switch5", message: "Đã bật ghim đầu và cổ" },
+        { id: "switch6", message: "Đã tối ưu hóa" },
+        { id: "switch7", message: "Đã bật fix lố và headshot đỉnh đầu 🖥️" },
+        { id: "switch8", message: "Đã bật Aim Ẩn 🔫" },
+    ];
+
+    switches.forEach(({ id, message, submenu }) => {
+        const checkbox = document.getElementById(id);
+        checkbox.addEventListener("change", function () {
+            if (this.checked) {
+                alert(message);
+                if (submenu) {
+                    const choice = prompt("Chọn mức độ Antiban:\n1. Thấp\n2. Trung\n3. An toàn tuyệt đối", "3");
+                    console.log("Antiban level:", choice);
+                }
+            }
+        });
+    });
+});
+</script>
+
 </body>
 </html>
